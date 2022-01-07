@@ -1,5 +1,6 @@
 const Usuario = require("../../models/Users");
 const bcrypt = require("bcrypt");
+const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
 async function verifyLogin() {
@@ -7,7 +8,12 @@ async function verifyLogin() {
 }
 
 const createUser = async (req, res) => {
-
+  
+  //revisar si hay errores
+  const errores = validationResult(req);
+  if (!errores.isEmpty()) {
+    return res.status(400).json({ errores: errores.array() });
+  }
   //extraer email y password
   const { email, password } = req.body;
 

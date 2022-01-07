@@ -21,7 +21,9 @@ userRouter.post("/sign-up",
 //userRouter.get("/reset-pass");
 
 /* Profile details */
-//userRouter.get("/profile");
+userRouter.get("/profile");
+
+userRouter.put("/profile");
 
 module.exports = {
   userRouter: userRouter,
