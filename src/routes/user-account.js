@@ -1,7 +1,7 @@
 const Router = require("express").Router;
 const userRouter = Router();
 const { check } = require("express-validator");
-const createUser = require('../controllers/user-account')
+const {createUser} = require('../controllers/user-account')
 
 /* Auth login */
 //userRouter.use();
@@ -14,9 +14,7 @@ userRouter.post("/sign-up",
   [check("name", "El nombre es obligatorio").not().isEmpty()],
   [check("email", "Agrega un email válido").isEmail()],
   [check('password', "La passwrod debe tener 6 caracteres").isLength({min: 6})],
-  () => {
-    createUser
-  }
+  createUser
 );
 
 /* Reset Password */

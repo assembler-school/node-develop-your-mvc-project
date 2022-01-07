@@ -6,11 +6,11 @@ async function verifyLogin() {
 
 }
 
-async function createUser(req, res) {
+const createUser = async (req, res) => {
 
   //extraer email y password
   const { email, password } = req.body;
-  console.log(email, password)
+
   try {
     //revisar que el usuario registrado sea unico
     let usuario = await Usuario.findOne({ email });
