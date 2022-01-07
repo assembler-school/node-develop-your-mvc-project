@@ -1,13 +1,18 @@
 const Router = require("express").Router;
 const userRouter = Router();
 const { check } = require("express-validator");
-const {createUser} = require('../controllers/user-account')
+const {createUser, verifyLogin, authUser, modifyUser} = require('../controllers/user-account')
+const auth = require("../middleware/auth");
 
 /* Auth login */
 //userRouter.use();
 
 /* Login */
-//userRouter.post("/login");
+userRouter.post("/login", 
+  [check("email", "Agrega un email válido").isEmail()],
+  [check('password', "La passwrod debe tener 6 caracteres").isLength({min: 6})],
+  verifyLogin
+);
 
 /* Create account */
 userRouter.post("/sign-up", 
@@ -21,9 +26,16 @@ userRouter.post("/sign-up",
 //userRouter.get("/reset-pass");
 
 /* Profile details */
-userRouter.get("/profile");
 
-userRouter.put("/profile");
+//UserAuth
+userRouter.get("/", auth, authUser)
+
+//Modify UserDates
+userRouter.put("/profile/:id", auth,   
+[check("name", "El nombre es obligatorio").not().isEmpty()],
+[check("email", "Agrega un email válido").isEmail()],
+[check('password', "La passwrod debe tener 6 caracteres").isLength({min: 6})],
+modifyUser);
 
 module.exports = {
   userRouter: userRouter,
