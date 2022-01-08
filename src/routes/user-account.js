@@ -31,7 +31,7 @@ userRouter.post("/sign-up",
 userRouter.get("/", auth, authUser)
 
 //Modify UserDates
-userRouter.put("/profile/:id", auth,   
+userRouter.put("/profile", auth,   
 [check("name", "El nombre es obligatorio").not().isEmpty()],
 [check("email", "Agrega un email válido").isEmail()],
 [check('password', "La passwrod debe tener 6 caracteres").isLength({min: 6})],

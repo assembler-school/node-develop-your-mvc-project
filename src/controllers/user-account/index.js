@@ -113,22 +113,20 @@ const authUser = async (req, res) => {
 
 const modifyUser = async (req, res)=>{
   try {
-        //extraer email y password
-        const { name, email, password } = req.body;
-        const newUser = {};
+        //extraer nombre y password
+        const { name, password } = req.body;
+        const newUser = {name};
 
-        //revisar que el usuario registrado sea unico
-        let usuario = await Usuario.findOne({ email });
-        if (usuario) {
-          return res.status(400).json({ msg: "El usuario ya existe" });
-        }
+        //Como introducir un nuevo email
+
 
         //Hashear el password
         const salt = await bcrypt.genSalt(10);
-        usuario.password = await bcrypt.hash(password, salt);
+        newUser.password = await bcrypt.hash(password, salt);
+
 
         //guardar usuario Modificado
-        usuario = Usuario.findByIdAndUpdate({_id:req.params.id}, {name, email, password})
+        let usuario = await Usuario.findByIdAndUpdate(req.usuario.id, newUser)
 
 
         //crear y firmar el JWT
@@ -153,7 +151,7 @@ const modifyUser = async (req, res)=>{
    
   } catch (error) {
     console.log(error);
-    res.status(500).json({ msg: "Hubo un error" });
+    res.status(500).json({ msg: "El usuario ya existe o ha habido un error" });
   }
 }
 
