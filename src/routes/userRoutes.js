@@ -3,6 +3,7 @@ const userRouter = Router();
 const { check } = require("express-validator");
 const {createUser, verifyLogin, authUser, modifyUser} = require('../controllers/userController')
 const auth = require("../middleware/auth");
+const isEmployee = require("../middleware/isEmployee")
 
 /* Auth login */
 //userRouter.use();
@@ -28,7 +29,7 @@ userRouter.post("/sign-up",
 /* Profile details */
 
 //UserAuth
-userRouter.get("/profile", auth, authUser)
+userRouter.get("/profile", auth, isEmployee, authUser)
 
 //Modify UserDates
 userRouter.put("/profile", auth,   
