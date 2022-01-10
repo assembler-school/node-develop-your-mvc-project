@@ -2,25 +2,17 @@ const express = require("express");
 const { json } = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const { userRouter } = require("./routes/userRoutes");
-const { productRouter } = require("./routes/product");
+const apiRouter  = require("./routes/apiRouter");
 
 const app = express();
 
 app.use(json());
+
 app.use(morgan("dev"));
+
 app.use(helmet());
 
+app.use('/api', apiRouter);
 
-app.use('/api/users', userRouter);
-
-app.use('/product', productRouter);
-
-
-app.get("/", (req, res) => {
-  res.status(200).send({
-    data: "hello-mundo",
-  });
-});
 
 module.exports = app;
