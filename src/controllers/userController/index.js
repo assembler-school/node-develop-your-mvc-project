@@ -114,8 +114,8 @@ const authUser = async (req, res) => {
 const modifyUser = async (req, res)=>{
   try {
         //extraer nombre y password
-        const { name, password } = req.body;
-        const newUser = {name};
+        const { name, password, email } = req.body;
+        const newUser = {name, email};
 
         //Como introducir un nuevo email
 
