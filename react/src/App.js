@@ -5,6 +5,7 @@ import UserState from "./context/users/userState";
 import Login from "./components/usuarios/Login"
 import Signin from "./components/usuarios/Signin";
 import tokenAuth from "./config/tokenAuth";
+import Home from "./components/home";
 
 
 const token = localStorage.getItem("token");
@@ -17,8 +18,11 @@ function App() {
     <UserState>
       <Router>
         <Routes>
-          <Route exact path ="/" element={<Login />} />
+          <Route exact path ="/" element={<Home />} />
+          <Route exact path ="/login" element={<Login />} />
           <Route exact path ="/sign-in" element={<Signin />} />
+          <Route exact path ="/product" element={<Login />} />
+          <Route exact path ="/checkout" element={<Login />} />
         </Routes>
       </Router>
     </UserState>
