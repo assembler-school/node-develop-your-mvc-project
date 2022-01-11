@@ -38,6 +38,4 @@ userRouter.put("/profile", auth,
 [check('password', "La passwrod debe tener 6 caracteres").isLength({min: 6})],
 modifyUser);
 
-module.exports = {
-  userRouter: userRouter,
-};
+module.exports = userRouter;

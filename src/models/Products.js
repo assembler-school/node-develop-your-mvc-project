@@ -3,6 +3,12 @@ const Schema = mongoose.Schema;
 
 const pagination = require("mongoose-paginate-v2");
 
+const imageSchema = new Schema({
+  title: { type: String },
+  url: { type: String },
+  alt: { type: String },
+});
+
 const productSchema = new Schema({
   id: { type: mongoose.Schema.ObjectId },
   name: { type: String, lowercase: true, required: true },
@@ -12,15 +18,9 @@ const productSchema = new Schema({
   image: [imageSchema],
 });
 
-const imageSchema = new Schema({
-  title: { type: String },
-  url: { type: String },
-  alt: { type: String },
-});
-
 productSchema.plugin(pagination);
 
 module.exports = {
-  productSchema,
+  productModel: mongoose.model("Product", productSchema),
   imageSchema,
 };
