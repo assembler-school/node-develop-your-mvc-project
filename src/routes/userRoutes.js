@@ -11,7 +11,7 @@ const isEmployee = require("../middleware/isEmployee")
 /* Login */
 userRouter.post("/login", 
   [check("email", "Agrega un email válido").isEmail()],
-  [check('password', "La passwrod debe tener 6 caracteres").isLength({min: 6})],
+  [check('password', "La passwrod debe tener 4 caracteres").isLength({min: 4})],
   verifyLogin
 );
 
@@ -29,7 +29,7 @@ userRouter.post("/sign-up",
 /* Profile details */
 
 //UserAuth
-userRouter.get("/profile", auth, isEmployee, authUser)
+userRouter.get("/profile", auth, authUser)
 
 //Modify UserDates
 userRouter.put("/profile", auth,   
