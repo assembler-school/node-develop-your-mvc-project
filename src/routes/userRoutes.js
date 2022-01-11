@@ -3,6 +3,7 @@ const userRouter = Router();
 const { check } = require("express-validator");
 const {createUser, verifyLogin, authUser, modifyUser} = require('../controllers/userController')
 const auth = require("../middleware/auth");
+const isEmployee = require("../middleware/isEmployee")
 
 /* Auth login */
 //userRouter.use();
@@ -10,7 +11,7 @@ const auth = require("../middleware/auth");
 /* Login */
 userRouter.post("/login", 
   [check("email", "Agrega un email válido").isEmail()],
-  [check('password', "La passwrod debe tener 6 caracteres").isLength({min: 6})],
+  [check('password', "La passwrod debe tener 4 caracteres").isLength({min: 4})],
   verifyLogin
 );
 

@@ -4,12 +4,12 @@ const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
 const verifyLogin = async (req, res) => {
-   //revisar si hay errores
-   const errores = validationResult(req);
-   if (!errores.isEmpty()) {
-     return res.status(400).json({ errores: errores.array() });
-   }
- 
+  //revisar si hay errores
+  const errores = validationResult(req);
+  if (!errores.isEmpty()) {
+    return res.status(400).json({ errores: errores.array() });
+  }
+  
    //extraer el usuario y el password
    const { email, password } = req.body;
  
@@ -45,6 +45,7 @@ const verifyLogin = async (req, res) => {
          if (error) throw error;
  
          //Mensaje de confirmación
+         console.log(token)
          res.json({ token });
        }
      );
