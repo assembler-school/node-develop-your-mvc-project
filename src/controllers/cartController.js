@@ -20,6 +20,7 @@ const addProductToCart = async (req, res) => {
     user: userId,
     products: [product]
   })
+  
   newCart.save()
   return res.json('Created cart in DB')
 

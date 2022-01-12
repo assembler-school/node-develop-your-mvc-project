@@ -6,8 +6,11 @@ import Login from "./components/usuarios/Login"
 import Signin from "./components/usuarios/Signin";
 import tokenAuth from "./config/tokenAuth";
 import Home from "./components/home";
+
+import Profile from "./components/usuarios/Profile"
 import CreateProductForm from "./components/product/createProductForm";
 import CartState from "./context/cart/cartState";
+
 
 
 const token = localStorage.getItem("token");

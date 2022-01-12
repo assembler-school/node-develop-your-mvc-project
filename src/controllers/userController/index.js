@@ -118,9 +118,7 @@ const modifyUser = async (req, res)=>{
         const { name, password, email } = req.body;
         const newUser = {name, email};
 
-        //Como introducir un nuevo email
-
-
+ 
         //Hashear el password
         const salt = await bcrypt.genSalt(10);
         newUser.password = await bcrypt.hash(password, salt);

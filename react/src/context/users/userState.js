@@ -4,7 +4,7 @@ import userReducer from "./userReducer"
 
 import axiosClient from "../../config/axios"
 
-import { LOGIN_OK, OBTAIN_AUTH_USER, REGISTER_OK } from "../../types";
+import { LOGIN_OK, OBTAIN_AUTH_USER, REGISTER_OK, MODIFY_USER } from "../../types";
 import tokenAuth from "../../config/tokenAuth";
 
 const UserState = (props) => {
@@ -67,6 +67,23 @@ const UserState = (props) => {
             }
     }
 
+    const modyfyUser = async (formData)=>{
+        try {
+            const dataRegister = await axiosClient.post("users/profile", formData)
+
+            dispatch({
+                type: MODIFY_USER,
+                payload: dataRegister.data,
+              });
+            
+              authUser();
+            
+        } catch (error) {
+            console.log(error)
+            
+        }
+    }
+
 
 
     return(
@@ -77,7 +94,8 @@ const UserState = (props) => {
                 auth: state.auth,
                 loginUser,
                 registerUser,
-                authUser
+                authUser,
+                modyfyUser
             }}
         >
             {props.children}
