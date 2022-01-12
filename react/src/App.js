@@ -6,6 +6,7 @@ import Login from "./components/usuarios/Login"
 import Signin from "./components/usuarios/Signin";
 import tokenAuth from "./config/tokenAuth";
 import Home from "./components/home";
+import Profile from "./components/usuarios/Profile"
 
 
 const token = localStorage.getItem("token");
@@ -21,6 +22,7 @@ function App() {
           <Route exact path ="/" element={<Home />} />
           <Route exact path ="/login" element={<Login />} />
           <Route exact path ="/sign-in" element={<Signin />} />
+          <Route exact path ="/profile" element={<Profile />} />
           <Route exact path ="/product" element={<Login />} />
           <Route exact path ="/checkout" element={<Login />} />
         </Routes>
