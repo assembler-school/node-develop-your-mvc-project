@@ -1,4 +1,4 @@
-const Usuario = require("../../models/Users");
+const User = require("../../models/Users");
 const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
@@ -15,7 +15,7 @@ const verifyLogin = async (req, res) => {
  
    try {
      //revisar que sea un usuario registrado
-     let usuario = await Usuario.findOne({ email });
+     let usuario = await User.findOne({ email });
      if (!usuario) {
        return res.status(400).json({ msg: "El usuario no existe" });
      }
@@ -66,12 +66,12 @@ const createUser = async (req, res) => {
 
   try {
     //revisar que el usuario registrado sea unico
-    let usuario = await Usuario.findOne({ email });
+    let usuario = await User.findOne({ email });
     if (usuario) {
       return res.status(400).json({ msg: "El usuario ya existe" });
     }
     //crear nuevo usuario
-    usuario = new Usuario(req.body);
+    usuario = new User(req.body);
     //Hashear el password
     const salt = await bcrypt.genSalt(10);
     usuario.password = await bcrypt.hash(password, salt);
@@ -104,7 +104,7 @@ const createUser = async (req, res) => {
 
 const authUser = async (req, res) => {
   try {
-    const usuario = await Usuario.findById(req.usuario.id).select("-password");
+    const usuario = await User.findById(req.usuario.id).select("-password");
     res.json({ usuario });
   } catch (error) {
     console.log(error);
@@ -127,7 +127,7 @@ const modifyUser = async (req, res)=>{
 
 
         //guardar usuario Modificado
-        let usuario = await Usuario.findByIdAndUpdate(req.usuario.id, newUser)
+        let usuario = await User.findByIdAndUpdate(req.usuario.id, newUser)
 
 
         //crear y firmar el JWT

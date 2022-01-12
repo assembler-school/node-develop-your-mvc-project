@@ -1,17 +1,26 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import cartContext from '../../context/cart/cartContext'
+import userContext from '../../context/users/userContext'
 
 function ProductCard(props) {
   const {_id: id, name, description, price, stock, image} = props.productData
 
   const [quantity, setQuantity ] = useState(0)
 
-  const addToCart = (event) => {
-    const id = event.target.getAttribute('idproduct')
+  const contextCart = useContext(cartContext)
+  const contextUser = useContext(userContext)
 
-    // Context del cart
+  const sendToCart = (event) => {
+    event.preventDefault()
 
-    // Req al server para añadir producto al carrito
+    contextCart.addToCart(
+      {
+        user: contextUser.user,
+        product: {id, name, description, price, stock, image}
+      }
+    )
   }
+
 
   const getQuantity = (event) => {
     const qty = event.target.value
@@ -28,9 +37,9 @@ function ProductCard(props) {
         <p className="card-text">{price}</p>
         <p className="card-text">{stock}</p>
 
-        <input type="number" onChange={getQuantity} className="form-control d-inline itemnumber" value={quantity} aria-label="Username" aria-describedby="addon-wrapping" />
+        <input type="hidden" onChange={getQuantity} className="form-control d-inline itemnumber" value={quantity} aria-label="Username" aria-describedby="addon-wrapping" />
 
-        <button onClick={addToCart} idproduct={id} className="btn btn-primary">Add to cart</button>
+        <button onClick={sendToCart} idproduct={id} className="btn btn-primary">Add to cart</button>
       </div>
     </div>
   )

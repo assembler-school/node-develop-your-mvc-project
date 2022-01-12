@@ -1,8 +1,8 @@
-const Usuario = require("../models/Users")
+const User = require("../models/Users")
 
 module.exports = isEmployee = async (req, res, next) => {
     try {
-      const user = await Usuario.findById(req.usuario.id);
+      const user = await User.findById(req.usuario.id);
       if (user.rol === "employee" || user.rol === "admin"){
           next();
           return;

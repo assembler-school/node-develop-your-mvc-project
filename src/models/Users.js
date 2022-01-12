@@ -8,4 +8,4 @@ const ClientSchema = new Schema({
   rol: {type: String, required: true, trim: true, default: "user"}
 });
 
-module.exports = mongoose.model("Usuario", ClientSchema)
+module.exports = mongoose.model("User", ClientSchema)
