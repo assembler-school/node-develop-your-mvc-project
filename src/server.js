@@ -5,13 +5,15 @@ const morgan = require("morgan");
 const apiRouter  = require("./routes/apiRouter");
 const cors = require("cors");
 const { createAdmin} = require("./libs/initialSetup");
-
+const fileUpload = require('express-fileupload')
 const app = express();
 createAdmin();
 
 app.use(json());
 app.use(cors());
 app.use(express.static('public'));
+
+app.use(fileUpload())
 
 app.use(morgan("dev"));
 

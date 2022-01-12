@@ -1,17 +1,28 @@
 const {productModel: Product} = require('../models/Products')
 
-const createProduct = async (req, res) => {
 
-  try {
-    const product = new Product(req.body)
+const createProduct = (req, res) => {
 
-    await product.save()
+  const productImage = req.files.image
+  
+  if (!productImage) return res.status(500).send({ message : 'Missing file input' })  
 
-    res.json({"response":'Producto creado correctamente'})
+  productImage.mv(`public/assets/img/${productImage.name}`, err => {
+    
+    if (err) return res.status(500).send({ message : err })
 
-  } catch (error) {
-    res.send(error)
-  }
+    const product = new Product({
+      ...req.body,
+      image: [{
+        title: `${req.body.name} ${req.body.description}`, 
+        url: productImage.name
+      }] 
+    })
+    product.save()
+    
+    return res.status(200).send({ message : 'Producto creado correctamente' })
+  })
+    
 } 
 
 const getProduct = async (req, res) => {
