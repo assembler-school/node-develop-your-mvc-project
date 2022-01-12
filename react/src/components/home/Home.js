@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import axiosClient from '../../config/axios'
 
-import ProductCard from '../product/'
+import {ProductCard} from '../product/'
 
 
 function Home() {
