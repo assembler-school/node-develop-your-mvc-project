@@ -2,17 +2,24 @@ const express = require("express");
 const { json } = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
-
+const apiRouter  = require("./routes/apiRouter");
+const cors = require("cors");
+const { createAdmin} = require("./libs/initialSetup");
+const fileUpload = require('express-fileupload')
 const app = express();
+createAdmin();
 
 app.use(json());
+app.use(cors());
+app.use(express.static('public'));
+
+app.use(fileUpload())
+
 app.use(morgan("dev"));
+
 app.use(helmet());
 
-app.get("/", (req, res) => {
-  res.status(200).send({
-    data: "hello-mundo",
-  });
-});
+app.use('/api', apiRouter);
+
 
 module.exports = app;
