@@ -1,4 +1,4 @@
-`#node.js` `#mvc` `#assembler-school` `#master-in-software-engineering`
+`#node.js` `#mvc` `#assembler-institute` `#master-in-software-engineering`
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -6,7 +6,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-# Assembler School: Node.js Develop Your Project MVC <!-- omit in toc -->
+# Assembler Institute: Node.js Develop Your Project MVC <!-- omit in toc -->
 
 > In this project you will be able to create one of our Develop Your Project
 > projects based on the MVC pattern in Node.js.
